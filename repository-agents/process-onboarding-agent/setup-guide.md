@@ -512,12 +512,25 @@ Create this directory tree at the root of your repository:
   skills/
     mob-elab-prompts.md      ← interactive protocol and prompts for elaboration sessions
     review-checklist.md      ← structured lens for reviewing AI output
-    unit-template.md         ← how to write a unit (reference doc)
     compact-docs.md          ← engineer-triggered skill to archive old operational documents
     root-cause-analysis.md   ← skill to analyse incidents and improvements for design, technology, and process gaps
+    solution-shaping.md      ← decides generic-vs-specific, simplest-viable approach, and extend-vs-build-vs-buy before design begins
+    design-session.md        ← Phase 0 of elaboration — locks API contracts and data model decisions before units are proposed
+    bolt-risk-assessment.md  ← blast radius, rollback, and feature flag assessment before a bolt's first unit executes
+    progress-digest.md       ← plain-language stakeholder progress summary for a feature intent
+    uat.md                   ← acceptance testing protocol; blocks an intent from closing without sign-off
+    process-health.md        ← quantitative report on how well the AI-DLC process is functioning
+    dependency-audit.md      ← scheduled audit of third-party dependencies by severity
+    knowledge-promotion.md   ← classifies retro improvements as generic (promote to base repo) or project-specific
     notifications.md         ← Slack alerts at delivery moments that need a human
     ai-hub-metrics.md        ← pushes usage/activity events to 99x AI Hub
+    process-visualization.md ← reconstructs how a bolt actually got delivered as Mermaid diagrams
+    new-engineer-induction.md ← walks a new team member through the project's framework
+    bug-bolt.md               ← lightweight bolt workflow for fixing a specific, reproducible bug
+    hotfix-bolt.md            ← emergency bolt for production incidents
+    nfr-bolt.md               ← non-functional quality attribute bolt (performance, security, accessibility)
     product-engineering-essentials.md  ← optional ten-pillar checklist of product/engineering foundations
+    release-readiness-checklist.md     ← engineer-invoked, self-attestation UAT/production release checklist
   guidelines/
     domain-glossary.md       ← canonical business terms used in code and prompts
     edge-cases.md            ← known failure modes to check before generating code
@@ -671,10 +684,10 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 **Process health skill:** read `{FRAMEWORK_ROOT}/skills/process-health.md` when the engineer invokes it to audit how well the AI-DLC process is functioning.
 **New engineer induction skill:** read `{FRAMEWORK_ROOT}/skills/new-engineer-induction.md` when an engineer says they are new to the project or invokes it directly.
 **Product engineering essentials skill:** read `{FRAMEWORK_ROOT}/skills/product-engineering-essentials.md` when the engineer invokes it directly, or once as an optional offer at the end of onboarding (setup guide **Onboarding Completion**, item 4b). Never run automatically or on a schedule — it is a checklist, not a gate.
+**Release readiness checklist skill:** read `{FRAMEWORK_ROOT}/skills/release-readiness-checklist.md` when the engineer invokes it directly before a UAT or production release ("run the release checklist", "check release readiness", "pre-release checklist for [version]"). Never run automatically or on a schedule — it is a self-attestation record, not a gate.
 **Knowledge promotion skill:** read `{FRAMEWORK_ROOT}/skills/knowledge-promotion.md` as Step 5 of the Post-Retro Improvement Workflow after all improvements are applied. A retro is not closed until every Applied improvement has a Knowledge Promotion status.
 **Process visualization skill:** offer to read `{FRAMEWORK_ROOT}/skills/process-visualization.md` at the start of every retro, before "What Went Well" is discussed. The engineer may accept, skip, or invoke it directly at any time. Never run it without the engineer's go-ahead.
 **Dependency audit skill:** read `{FRAMEWORK_ROOT}/skills/dependency-audit.md` when the engineer invokes it, or when the `Next dependency audit` date in Section 9 has been reached. Prompt at session start if the date is due.
-**Process health skill:** read `{FRAMEWORK_ROOT}/skills/process-health.md` when the engineer invokes it to audit how well the AI-DLC process is functioning.
 **Compact-docs skill:** read `{FRAMEWORK_ROOT}/skills/compact-docs.md` when the engineer invokes it.
 **Root-cause-analysis skill:** read `{FRAMEWORK_ROOT}/skills/root-cause-analysis.md` when the engineer invokes it, or when an incident is marked Resolved and no RCA has been run on it.
 **Notifications skill:** read `{FRAMEWORK_ROOT}/skills/notifications.md` when a lifecycle event in Section 10 is reached (elaboration sign-off required, bolt complete, UAT sign-off required, intent implemented, incident/hotfix started, circuit breaker tripped, dependency audit due), or when the engineer asks to send, configure, or silence notifications. Sending is best-effort — send and continue; never block a step on it. Skip if Section 10 is set to disabled or the engineer silenced notifications this session.
@@ -1032,6 +1045,20 @@ Copy this file verbatim from `process-onboarding-agent/skills/product-engineerin
 
 ```markdown
 **Product engineering essentials skill:** read `{FRAMEWORK_ROOT}/skills/product-engineering-essentials.md` when the engineer invokes it directly, or once as an optional offer at the end of onboarding. Never run automatically or on a schedule — it is a checklist, not a gate.
+```
+
+### `skills/release-readiness-checklist.md`
+
+The release-readiness-checklist skill walks the engineer through the UAT Release Checklist or the Production Release Checklist, one item at a time, before a release goes out. Unlike product-engineering-essentials, it never inspects the repository for evidence — it is a pure self-attestation record: the engineer states Confirmed / Not confirmed / N/A for each item, the skill records the answer (and a blocker note for anything Not confirmed), and produces a report at the end. It is also distinct from `uat.md`: `uat.md` validates feature *behavior* against acceptance criteria with a stakeholder; this skill checks release *mechanics* — build, testing, security, database, deployment/rollback, environment readiness, and sign-offs.
+
+**This is not a gate.** The skill never authorizes or blocks a release; it surfaces the self-reported state so whoever holds sign-off (technical owner, QA, security, product, operations, as applicable) can decide with full information. It never runs automatically or on a schedule.
+
+Copy this file verbatim from `process-onboarding-agent/skills/release-readiness-checklist.md` to `{FRAMEWORK_ROOT}/skills/release-readiness-checklist.md`. No customization is needed.
+
+**Wire into the master rule file Section 6** by adding one routing line:
+
+```markdown
+**Release readiness checklist skill:** read `{FRAMEWORK_ROOT}/skills/release-readiness-checklist.md` when the engineer invokes it directly before a UAT or production release ("run the release checklist", "check release readiness", "pre-release checklist for [version]"). Never run automatically or on a schedule — it is a self-attestation record, not a gate.
 ```
 
 ### `skills/knowledge-promotion.md`
