@@ -72,7 +72,7 @@ Every finding must be classified before it goes into the report.
 | Check | Aligned | Partially Aligned | Not Aligned |
 |---|---|---|---|
 | **Project Identity (Section 1)** | Stack, boundaries, and system constraints are specific and accurate | Present but vague or incomplete | Missing or generic placeholder |
-| **Prompt Quality Gate (Section 2)** | Routes to `rules/prompt-quality-gate.md` with a clear mandatory-read instruction | Gate referenced but embedded inline as a wall of text | Missing entirely |
+| **Prompt Quality Gate (Section 2)** | Routes to `rules/prompt-quality-gate.md` with a clear mandatory-read instruction, and includes the mandatory Sensitive Data Check line (scans every request regardless of whether the four components are complete) | Gate referenced but embedded inline as a wall of text, or the four-component routing is present but the Sensitive Data Check line is missing | Missing entirely |
 | **Code Rules (Section 3)** | 3–5 hard-stop prohibitions in working memory; routes to rules files for the rest | Long lists embedded inline; no routing | Missing or only generic rules |
 | **Domain Language (Section 4)** | Routes to `guidelines/domain-glossary.md`; 2–3 critical terms inline | Full glossary embedded inline (not routed) | Domain terms not defined |
 | **Edge Cases (Section 5)** | Routes to `guidelines/edge-cases.md` with a mandatory-read instruction | Some edge cases inline; no routing | Missing |

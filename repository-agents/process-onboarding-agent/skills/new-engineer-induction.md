@@ -217,14 +217,16 @@ Inception → Build → Operate → Improvements → (repeat)
 
 ---
 
-## The Quality Gate — Four Components Required
+## The Quality Gate — Two Checks
 
-Every prompt must have all four or I will stop and ask:
+**Four components required.** Every prompt must have all four or I will stop and ask:
 
 1. **Context** — who needs this, what it does, where it sits
 2. **Constraints** — which rules apply (read `process-onboarding-agent/rules/code-standards.md` first)
 3. **Acceptance Criteria** — testable Given/When/Then statements
 4. **Output Format** — which files, new or update existing
+
+**Sensitive Data Check — runs on every prompt, independent of the four components above.** If a prompt contains a credential, API key, secret, or personal data, I stop before using or repeating it back, name the category found, and ask you to confirm it's intentional or redact it — even when all four components above are already complete.
 
 ---
 
@@ -290,6 +292,7 @@ Full glossary: `process-onboarding-agent/guidelines/domain-glossary.md`
 | Mistake | What happens | What to do instead |
 |---|---|---|
 | Sending an incomplete prompt | I stop and ask for the missing component | Include all four gate components |
+| Pasting a credential, secret, or personal data into a prompt | I stop and ask you to confirm it's intentional or redact it | Redact the value first, or confirm deliberately before continuing |
 | Accepting output without reviewing | Bugs reach the codebase | Run the review checklist before merging |
 | Skipping the retro | Mistakes recur in the next bolt | Run the retro immediately after every bolt |
 | Writing ACs that test implementation | Tests pass but behavior is wrong | ACs describe outcomes, not how the code works |
