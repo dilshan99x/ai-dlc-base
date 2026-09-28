@@ -26,6 +26,7 @@ Every file in this repo belongs to exactly one category. Before editing, confirm
 | Agent entry point | `repository-agents/process-*-agent/{onboard,migrate,estimate,role-play}.md` | The bootstrap trigger for one agent |
 | Agent protocol/guide | `repository-agents/process-*-agent/*-guide.md` | The full protocol an entry point runs |
 | Top-level reference doc | `readme-content/*.md` | Human-facing documentation of what exists and how it fits together |
+| Informational / rationale doc | `framework-values.md` | Explains the framework's design rationale for a contributor — **informational only**: not authoritative, not enforced by any agent or skill, not copied to consumer projects, and carries no Sync Set obligations. If it and an authoritative file (any other row in this table) ever conflict, the authoritative file governs. |
 | Root doc | `README.md`, `CONTRIBUTING.md`, `RULES.md`, `pr-review.md` | Entry points for a human landing on the repo |
 | Base repo's own master rule file | `CLAUDE.md`, `.cursor/rules/ai-dlc-base-governance.mdc`, `.github/copilot-instructions.md` | Auto-loaded routing into RULES.md/pr-review.md/CONTRIBUTING.md when working *on* ai-dlc-base itself — all three must route an assistant to the same places and trigger the same behavior; name, location, frontmatter, and tool-specific wording may differ (see Sync Set E). **Not** the master rule file template the onboarding agent generates for consumer projects (that's `repository-agents/process-onboarding-agent/setup-guide.md`'s subject, a different artifact entirely). |
 

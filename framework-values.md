@@ -2,6 +2,8 @@
 
 ← [Back to README](README.md)
 
+**Status: informational only.** This document explains *why* the framework's mechanisms exist — it is not itself a rule, a gate, or a source of enforced behavior, and no agent or skill reads it at runtime. Authority for what the framework actually requires lives in [RULES.md](RULES.md), [pr-review.md](pr-review.md), [CONTRIBUTING.md](CONTRIBUTING.md), and the files under `repository-agents/`; if this document ever reads as contradicting one of those, the other file governs. It is not copied into consumer projects by the onboarding agent.
+
 ---
 
 ## The founding objective
