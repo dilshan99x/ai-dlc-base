@@ -70,7 +70,7 @@ Pause after this section and ask: "Any questions before we move to the quality g
 Explain the quality gate using a concrete example from the project's domain.
 
 **First, show a bad prompt:**
-> "The quality gate has four components: Context, Constraints, Acceptance Criteria, and Output Format. If any are missing, I stop and ask — I don't guess. Here's what a bad prompt looks like in this project:"
+> "The quality gate checks two things: it has four components — Context, Constraints, Acceptance Criteria, and Output Format — and it never contains sensitive information you didn't mean to share. If either check fails, I stop and ask — I don't guess. Here's what a bad prompt looks like in this project:"
 
 Write an example incomplete prompt using a plausible feature for this project's domain (derived from the intent files or backlog):
 
@@ -99,6 +99,20 @@ Output:     New file at [path]. Update [other file] to register it.
 ```
 
 > "If you send me the bad version, I'll stop and ask for what's missing — every time, no exceptions. The gate exists because incomplete prompts produce output that looks correct but isn't."
+
+**Then show the sensitive-data check:**
+
+```
+Prompt with exposed data:
+"Debug this failing webhook call: curl -H 'Authorization: Bearer sk_live_51Hxxxx...' https://api.example.com/charge"
+
+What I do:
+- Stop before using or repeating the key back
+- Name the category found ("this looks like a live API key")
+- Ask you to confirm it's intentional and safe to have in this conversation, or to redact it and resend
+```
+
+> "This check runs on every prompt, not just ones missing a component — even a fully-specified request gets paused if it contains something like a credential, a customer's personal details, or an internal secret. Nothing sensitive gets written into code, logs, or commit messages without you confirming it first."
 
 ---
 
@@ -203,14 +217,16 @@ Inception → Build → Operate → Improvements → (repeat)
 
 ---
 
-## The Quality Gate — Four Components Required
+## The Quality Gate — Two Checks
 
-Every prompt must have all four or I will stop and ask:
+**Four components required.** Every prompt must have all four or I will stop and ask:
 
 1. **Context** — who needs this, what it does, where it sits
 2. **Constraints** — which rules apply (read `process-onboarding-agent/rules/code-standards.md` first)
 3. **Acceptance Criteria** — testable Given/When/Then statements
 4. **Output Format** — which files, new or update existing
+
+**Sensitive Data Check — runs on every prompt, independent of the four components above.** If a prompt contains a credential, API key, secret, or personal data, I stop before using or repeating it back, name the category found, and ask you to confirm it's intentional or redact it — even when all four components above are already complete.
 
 ---
 
@@ -276,6 +292,7 @@ Full glossary: `process-onboarding-agent/guidelines/domain-glossary.md`
 | Mistake | What happens | What to do instead |
 |---|---|---|
 | Sending an incomplete prompt | I stop and ask for the missing component | Include all four gate components |
+| Pasting a credential, secret, or personal data into a prompt | I stop and ask you to confirm it's intentional or redact it | Redact the value first, or confirm deliberately before continuing |
 | Accepting output without reviewing | Bugs reach the codebase | Run the review checklist before merging |
 | Skipping the retro | Mistakes recur in the next bolt | Run the retro immediately after every bolt |
 | Writing ACs that test implementation | Tests pass but behavior is wrong | ACs describe outcomes, not how the code works |
