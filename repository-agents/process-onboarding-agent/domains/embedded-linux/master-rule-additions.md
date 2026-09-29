@@ -50,12 +50,11 @@ Add routing lines:
 **Linux board bring-up:** read `{FRAMEWORK_ROOT}/skills/board-bringup-linux.md` when the engineer says "bring up Linux on X", "bootloader/kernel port for X", or "first boot for X". Skips elaboration and design session.
 **OTA A/B update bolt:** read `{FRAMEWORK_ROOT}/skills/ota-ab-update-bolt.md` when the engineer says "OTA update for X", "field update for X", or "release an update for X" on this project.
 **Kernel driver review:** read `{FRAMEWORK_ROOT}/skills/kernel-driver-review.md` as an addition to the standard review checklist whenever a unit touches kernel or driver code — run both, not one instead of the other.
+**Dependency audit (Embedded Linux addition):** read `{FRAMEWORK_ROOT}/skills/dependency-audit-linux.md` as an addition to `skills/dependency-audit.md` whenever the standard audit is run — run both, not one instead of the other.
 ```
-
-**No new dependency-audit routing line is needed** — the base Section 6 template already routes to `skills/dependency-audit.md`, and that skill file itself (in `{FRAMEWORK_ROOT}/skills/`) already covers Yocto/Buildroot manifests and license classification once this domain pack is installed. Do not add a duplicate routing line.
 
 ---
 
 ## Merge into Section 9 — Process Configuration
 
-No new row required. The existing `Next dependency audit` row (already present in the base Section 9 template) covers this domain's package/license audit too, since `dependency-audit.md` was extended rather than replaced.
+No new row required. The existing `Next dependency audit` row (already present in the base Section 9 template) covers this domain's package/license audit too, since `dependency-audit-linux.md` runs as an addition to the standard audit rather than replacing it.

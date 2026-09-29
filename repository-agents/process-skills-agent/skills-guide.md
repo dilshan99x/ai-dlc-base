@@ -315,12 +315,23 @@ Planned field update over an A/B partition update mechanism (Mender/RAUC/SWUpdat
 
 ---
 
-**Kernel Driver Review** (`embedded-linux/skills/kernel-driver-review.md`) `◈ Needs config`
+**Dependency Audit — Embedded Linux Addition** (`embedded-linux/skills/dependency-audit-linux.md`) `◇ Framework-only`
+
+An addition to Dependency Audit for Embedded Linux — reads Yocto/Buildroot manifests and runs a license-compliance pass against the project's license policy.
+
+- **When to invoke:** alongside every Dependency Audit run on an Embedded Linux project
+- **How to invoke:** `"Read [skill-path]/dependency-audit-linux.md and run the Embedded Linux dependency audit addition."`
+- **Dependency:** extends `skills/dependency-audit.md` and reads `rules/license-compliance.md`.
+
+---
+
+**Kernel Driver Review** (`embedded-linux/skills/kernel-driver-review.md`) `◇ Framework-only`
 
 An addition to your existing code review for kernel/driver code — locking correctness, error-path cleanup, reference-counting balance, and `checkpatch.pl` cleanliness.
 
 - **When to invoke:** reviewing any unit that touches kernel or driver code
 - **How to invoke:** `"Read [skill-path]/kernel-driver-review.md and review this kernel/driver change: [paste diff or description]."`
+- **Dependency:** extends `skills/review-checklist.md`, which is generated per project by the full framework.
 
 ---
 

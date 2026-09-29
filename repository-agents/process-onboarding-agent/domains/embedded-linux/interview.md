@@ -46,7 +46,7 @@ Record the update tool — it determines which `ota-ab-update-bolt.md` conventio
 
 > "Are there firmware/software choices already decided that must not be changed by the AI? Are there license restrictions on what can be included — for example, is GPLv3 prohibited in a commercial component, or is there a policy requiring all included packages' licenses to be tracked for a Software Bill of Materials (SBOM)? Are there existing BSP patches or vendor-supplied kernel changes that must not be modified without sign-off?"
 
-Capture license policy verbatim — it feeds `rules/license-compliance.md` and the dependency-audit extension.
+Capture license policy verbatim — it feeds `rules/license-compliance.md` and the `dependency-audit-linux.md` addition.
 
 ---
 

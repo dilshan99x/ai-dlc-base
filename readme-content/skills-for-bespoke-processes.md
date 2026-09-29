@@ -24,9 +24,9 @@ Skills are classified by dependency so teams can make informed choices:
 
 **Standalone and needs-config skills** (usable immediately): Product Engineering Essentials, Solution Shaping, Design Session, Risk Assessment, UAT Sign-off, Release Readiness Checklist, Root Cause Analysis, Process Visualization, Progress Digest, Knowledge Promotion, Dependency Audit, Compact Docs, Process Health, Hotfix Workflow, Notifications, and AI Hub Metrics.
 
-**Domain-pack standalone and needs-config skills** (Embedded MCU and Embedded Linux — relevant only to hardware teams; see [Domain packs](domain-packs.md)): Hardware Bring-up, HIL Verification, BOM/Component Audit, Firmware Release Bolt, Errata Bolt, Linux Board Bring-up, OTA A/B Update Bolt, and Kernel Driver Review.
+**Domain-pack standalone and needs-config skills** (Embedded MCU and Embedded Linux — relevant only to hardware teams; see [Domain packs](domain-packs.md)): Hardware Bring-up, HIL Verification, BOM/Component Audit, Firmware Release Bolt, Errata Bolt, Linux Board Bring-up, and OTA A/B Update Bolt.
 
-**Framework-only skills** (Bug Bolt, NFR Bolt, New Engineer Induction) can be installed as reference material for future use if your team plans to adopt AI-DLC fully later.
+**Framework-only skills** (Bug Bolt, NFR Bolt, New Engineer Induction, and the Embedded Linux additions Kernel Driver Review and Dependency Audit — Embedded Linux Addition) can be installed as reference material for future use if your team plans to adopt AI-DLC fully later.
 
 ---
 
@@ -49,7 +49,7 @@ Skills are classified by dependency so teams can make informed choices:
 
 **Step 1 — Process discovery interview.** Five questions about how your team currently works, where AI assistance already helps, common failure modes, stakeholder communication, and what gap you want to fill. The agent uses your answers to flag relevant skills with a ★ Recommended marker.
 
-**Step 2 — Skills catalogue.** The full catalogue of 27 skills, grouped by delivery moment (Product & Engineering Foundations, Planning & Design, Quality & Acceptance, Incident & Root Cause, Retrospective & Review, Communication & Reporting, Observability & Metrics, Maintenance & Health, Embedded & Linux, New Team Members, Workflow Shortcuts), with dependency classification for each.
+**Step 2 — Skills catalogue.** The full catalogue of 28 skills, grouped by delivery moment (Product & Engineering Foundations, Planning & Design, Quality & Acceptance, Incident & Root Cause, Retrospective & Review, Communication & Reporting, Observability & Metrics, Maintenance & Health, Embedded & Linux, New Team Members, Workflow Shortcuts), with dependency classification for each.
 
 **Step 3 — Selection.** You choose which skills to install. The agent warns before installing any ◇ Framework-only skills.
 

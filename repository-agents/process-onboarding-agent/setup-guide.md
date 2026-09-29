@@ -448,6 +448,12 @@ Each pack skill is copied verbatim from `process-onboarding-agent/domains/{pack}
 - **Errata bolt:** copy `errata-bolt.md` to `{FRAMEWORK_ROOT}/skills/errata-bolt.md`. Routed on "errata workaround" or "silicon bug in X".
 - **BOM audit skill (hardware track opt-in only):** copy `bom-audit.md` to `{FRAMEWORK_ROOT}/skills/bom-audit.md` only if the engineer opted into the hardware track (step 4 above).
 
+**Embedded Linux** (`domains/embedded-linux/skills/`):
+- **Linux board bring-up skill:** copy `board-bringup-linux.md` to `{FRAMEWORK_ROOT}/skills/board-bringup-linux.md`. Routed on "bring up Linux on X" or "first boot for X".
+- **OTA A/B update bolt:** copy `ota-ab-update-bolt.md` to `{FRAMEWORK_ROOT}/skills/ota-ab-update-bolt.md`. Routed on "OTA update for X".
+- **Kernel driver review:** copy `kernel-driver-review.md` to `{FRAMEWORK_ROOT}/skills/kernel-driver-review.md`. Run alongside `review-checklist.md` whenever a unit touches kernel or driver code.
+- **Dependency audit addition:** copy `dependency-audit-linux.md` to `{FRAMEWORK_ROOT}/skills/dependency-audit-linux.md`. Run alongside `dependency-audit.md`.
+
 ### Integration overlay (2 or more profiles selected)
 
 If `DOMAIN_PROFILES` contains more than one hardware profile, run the following in addition to the per-pack steps above, once, after all selected packs have been applied:

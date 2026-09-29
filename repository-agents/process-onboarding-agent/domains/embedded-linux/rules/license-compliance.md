@@ -1,6 +1,6 @@
 # License Compliance — Embedded Linux
 
-Copied into `{FRAMEWORK_ROOT}/rules/license-compliance.md` by the Domain Overlay. Read by `skills/dependency-audit.md`'s license-classification step (added to that shared skill when this domain pack is installed) and referenced whenever a new package/layer is added to the build.
+Copied into `{FRAMEWORK_ROOT}/rules/license-compliance.md` by the Domain Overlay. Read by `skills/dependency-audit-linux.md`'s license-compliance pass (an addition to `skills/dependency-audit.md`, installed with this domain pack) and referenced whenever a new package/layer is added to the build.
 
 ## Project License Policy
 
@@ -13,7 +13,7 @@ State this project's actual policy, captured from interview answer LNX-6 — do 
 
 - **Kernel and kernel modules (GPL-2.0):** any kernel module shipped with this project, including out-of-tree vendor modules, is GPL-licensed — the source (or a written offer for it) must be available to anyone who receives the compiled image. Flag any kernel module whose source is not already in the project's source tree or a documented upstream location.
 - **Statically linked LGPL libraries:** static linking against an LGPL library imposes different obligations than dynamic linking (typically requiring the ability to relink with a modified version of the library). Flag any LGPL dependency and confirm whether it's linked statically or dynamically before treating the obligation as satisfied.
-- **Copyleft packages pulled in transitively:** a Yocto recipe or Buildroot package can pull in a copyleft dependency that isn't obvious from the top-level package list. The dependency-audit skill's manifest read (recipes/package lists) is where this is checked — not just the packages the engineer explicitly added.
+- **Copyleft packages pulled in transitively:** a Yocto recipe or Buildroot package can pull in a copyleft dependency that isn't obvious from the top-level package list. `dependency-audit-linux.md`'s manifest read (recipes/package lists) is where this is checked — not just the packages the engineer explicitly added.
 
 ## SBOM Generation
 
