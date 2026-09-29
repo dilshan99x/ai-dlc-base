@@ -244,9 +244,9 @@ Computes four process health metrics — improvement adoption rate, quality gate
 
 ---
 
-### EMBEDDED MCU
+### EMBEDDED & LINUX
 
-*Relevant only to teams building MCU firmware (bare-metal or RTOS) — skip this category entirely for web/backend/mobile teams.* Sourced from `process-onboarding-agent/domains/embedded-mcu/skills/` rather than `process-onboarding-agent/skills/` — see Step 5 for the domain-pack copy path.
+*Relevant only to teams building MCU firmware or embedded Linux — skip this category entirely for web/backend/mobile teams.* Sourced from `process-onboarding-agent/domains/{embedded-mcu,embedded-linux}/skills/` rather than `process-onboarding-agent/skills/` — see Step 5 for the domain-pack copy paths.
 
 **Hardware Bring-up** (`embedded-mcu/skills/hardware-bring-up.md`) `◈ Needs config`
 
@@ -293,6 +293,34 @@ Bug-bolt-style workflow for a silicon/peripheral errata workaround — mandates 
 
 - **When to invoke:** implementing a workaround for a known chip/peripheral defect
 - **How to invoke:** `"Read [skill-path]/errata-bolt.md and start an errata workaround for [description/reference]."`
+
+---
+
+**Linux Board Bring-up** (`embedded-linux/skills/board-bringup-linux.md`) `◈ Needs config`
+
+Bootloader → kernel → device tree → rootfs bring-up for embedded Linux, distinct from the MCU pack's register-level bring-up.
+
+- **When to invoke:** first boot of embedded Linux on a new board or BSP
+- **How to invoke:** `"Read [skill-path]/board-bringup-linux.md and run Linux bring-up for [board name]."`
+- **Configuration needed:** where to log device-tree corrections if you don't use the domain pack's `ops/device-tree-map/` location.
+
+---
+
+**OTA A/B Update Bolt** (`embedded-linux/skills/ota-ab-update-bolt.md`) `◈ Needs config`
+
+Planned field update over an A/B partition update mechanism (Mender/RAUC/SWUpdate) — mandates a simulated power-loss-during-update test before any rollout.
+
+- **When to invoke:** planning a field OTA release
+- **How to invoke:** `"Read [skill-path]/ota-ab-update-bolt.md and plan an OTA release for [changes]."`
+
+---
+
+**Kernel Driver Review** (`embedded-linux/skills/kernel-driver-review.md`) `◈ Needs config`
+
+An addition to your existing code review for kernel/driver code — locking correctness, error-path cleanup, reference-counting balance, and `checkpatch.pl` cleanliness.
+
+- **When to invoke:** reviewing any unit that touches kernel or driver code
+- **How to invoke:** `"Read [skill-path]/kernel-driver-review.md and review this kernel/driver change: [paste diff or description]."`
 
 ---
 
@@ -355,6 +383,7 @@ Record the answer. Set **`SKILLS_ROOT`** to the path the engineer provides.
 Copy each selected skill file to `{SKILLS_ROOT}/[filename].md`. Do not modify the skill file content. The source path depends on which catalogue section the skill came from:
 - Base catalogue skills: `process-onboarding-agent/skills/[filename].md`
 - Embedded MCU skills: `process-onboarding-agent/domains/embedded-mcu/skills/[filename].md`
+- Embedded Linux skills: `process-onboarding-agent/domains/embedded-linux/skills/[filename].md`
 
 After copying, list every installed file and confirm the file count with the engineer before proceeding to Step 6.
 
