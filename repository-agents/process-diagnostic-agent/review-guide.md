@@ -159,7 +159,7 @@ Note the location each file comes from in the Artifact Log. Review the planning 
 | **Artifact handoff** | Marked Complete; every unit has a materialized file, owning bolt, intent link, and backlog link | Field present but handoff evidence is incomplete | Missing or still Pending |
 | **Risk Assessment** | Blast radius table present; rollback assessment and feature flag decision recorded (mandatory for mature projects) | "Risks and Assumptions" present but no blast radius or rollback analysis | Missing entirely |
 | **Retrospective link** | Links to completed retro for Done bolts | Missing on Done bolts | — |
-| **Hardware verification** *(only for a hardware Domain Profile)* | HIL verification, hardware bring-up, or Linux board bring-up sign-off present where the bolt's units touch hardware behavior — matching whichever domain pack(s) the project has installed | Sign-off present but incomplete (e.g. no measured values in a HIL result) | Bolt touches hardware behavior with no domain-pack verification artifact at all |
+| **Hardware/RTL verification** *(only for a hardware Domain Profile)* | HIL verification, timing-closure check, or Linux board bring-up sign-off present where the bolt's units touch hardware/RTL behavior — matching whichever domain pack(s) the project has installed | Sign-off present but incomplete (e.g. no measured values in a HIL result, no STA numbers in a timing-closure record) | Bolt touches hardware/RTL behavior with no domain-pack verification artifact at all |
 
 ### Unit File Rubric
 

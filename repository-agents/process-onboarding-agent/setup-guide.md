@@ -454,6 +454,11 @@ Each pack skill is copied verbatim from `process-onboarding-agent/domains/{pack}
 - **Kernel driver review:** copy `kernel-driver-review.md` to `{FRAMEWORK_ROOT}/skills/kernel-driver-review.md`. Run alongside `review-checklist.md` whenever a unit touches kernel or driver code.
 - **Dependency audit addition:** copy `dependency-audit-linux.md` to `{FRAMEWORK_ROOT}/skills/dependency-audit-linux.md`. Run alongside `dependency-audit.md`.
 
+**FPGA / RTL** (`domains/fpga/skills/`):
+- **FPGA verification skill:** copy `fpga-verification.md` to `{FRAMEWORK_ROOT}/skills/fpga-verification.md`. Run alongside `review-checklist.md` whenever a unit changes RTL.
+- **Timing closure check:** copy `timing-closure-check.md` to `{FRAMEWORK_ROOT}/skills/timing-closure-check.md`. Gates RTL milestone or release completion.
+- **Bitstream release:** copy `bitstream-release.md` to `{FRAMEWORK_ROOT}/skills/bitstream-release.md`. Routed on a bitstream release or tag.
+
 ### Integration overlay (2 or more profiles selected)
 
 If `DOMAIN_PROFILES` contains more than one hardware profile, run the following in addition to the per-pack steps above, once, after all selected packs have been applied:

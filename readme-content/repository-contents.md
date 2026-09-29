@@ -51,6 +51,9 @@ This repo is the **base template** — the source of truth that gets copied into
 | `repository-agents/process-onboarding-agent/domains/embedded-linux/skills/ota-ab-update-bolt.md` | Embedded Linux domain-pack skill. Planned field update over an A/B partition mechanism (Mender/RAUC/SWUpdate). Mandates a simulated power-loss-during-update test before rollout. |
 | `repository-agents/process-onboarding-agent/domains/embedded-linux/skills/kernel-driver-review.md` | Embedded Linux domain-pack skill. Addition to the standard review checklist for kernel/driver code — locking, error-path cleanup, refcount balance, `checkpatch.pl`. |
 | `repository-agents/process-onboarding-agent/domains/embedded-linux/skills/dependency-audit-linux.md` | Embedded Linux domain-pack skill. Addition to dependency audit for Embedded Linux — Yocto/Buildroot manifests and a license-compliance pass. |
+| `repository-agents/process-onboarding-agent/domains/fpga/skills/fpga-verification.md` | FPGA/RTL domain-pack skill. Addition to the standard review checklist for RTL — requires testbench, simulation, and coverage evidence, not a diff read, before an RTL unit is Done. |
+| `repository-agents/process-onboarding-agent/domains/fpga/skills/timing-closure-check.md` | FPGA/RTL domain-pack skill. Gate on static timing analysis and resource utilization after synthesis/place-and-route; distinct from functional simulation. |
+| `repository-agents/process-onboarding-agent/domains/fpga/skills/bitstream-release.md` | FPGA/RTL domain-pack skill. Versions an FPGA bitstream release with build provenance — RTL commit, toolchain version, timing margin, target board revision. |
 
 The remaining files (most of `rules/`, all of `guidelines/`, and the master rule file) are **generated per project** by the AI agent during onboarding — they cannot be shared across projects because they encode each project's specific stack, domain, and conventions.
 

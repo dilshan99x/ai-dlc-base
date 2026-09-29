@@ -58,7 +58,7 @@ Each tool loads its master rule file automatically at the start of every session
 
 ## Domain Packs — Embedded Hardware
 
-Optional, additive extensions to onboarding for mid-to-large embedded engineering — **Embedded MCU** (bare-metal or RTOS) **Embedded Linux** (Yocto/Buildroot), and **FPGA/RTL** are available now. Selected once during onboarding; Software-only projects are completely unaffected. → [Domain packs guide](readme-content/domain-packs.md)
+Optional, additive extensions to onboarding for mid-to-large embedded engineering — **Embedded MCU** (bare-metal or RTOS), **Embedded Linux** (Yocto/Buildroot), and **FPGA/RTL** are available now. Selected once during onboarding; Software-only projects are completely unaffected. → [Domain packs guide](readme-content/domain-packs.md)
 
 ---
 
@@ -133,7 +133,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ## Further Reading
 
-- [Domain packs](readme-content/domain-packs.md) — extending onboarding to Embedded MCU and Embedded Linux projects (FPGA/RTL planned)
+- [Domain packs](readme-content/domain-packs.md) — extending onboarding to Embedded MCU, Embedded Linux, and FPGA/RTL projects
 - [Agent descriptions and diagrams](readme-content/agents.md) — detailed behavior lists, how the agents work together, artifact lifecycle
 - [Repository contents reference](readme-content/repository-contents.md) — every file and folder in this repo with its purpose
 - [Diagnostics and review guide](readme-content/diagnostics-and-review.md) — full diagnostics guide including scope options, People and Tools review

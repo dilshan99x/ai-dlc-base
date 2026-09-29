@@ -40,7 +40,7 @@ Nothing in the base framework is removed or rewritten by this — it is strictly
 
 **FPGA / RTL** (`domains/fpga/`) — synchronous-design and clock-domain-crossing coding rules; an FPGA verification skill that layers onto the review checklist and requires testbench/simulation/coverage evidence (not a diff read) before an RTL unit is marked Done; a timing-closure check that gates bolt completion on static timing analysis and resource-utilization results, not just functional simulation; and a bitstream release skill that records build provenance (RTL commit, toolchain version, timing margin, target board revision) with every release.
 
-**Validation status:** the FPGA/RTL pack has not yet been validated against a real synthesis toolchain or board, unlike the Embedded MCU and Embedded Linux packs — treat its skills and rules as reviewed-but-unverified until a bring-up/verification run is recorded here.
+**Validation status:** no domain pack has a recorded validation run against a real board, kernel build, or synthesis toolchain yet — treat all pack skills and rules as reviewed-but-unverified until a bring-up/verification run is recorded here.
 
 ---
 
