@@ -58,7 +58,7 @@ Each tool loads its master rule file automatically at the start of every session
 
 ## Domain Packs — Embedded Hardware
 
-Optional, additive extensions to onboarding for mid-to-large embedded engineering — **Embedded MCU** (bare-metal or RTOS) and **Embedded Linux** (Yocto/Buildroot) are available now; an FPGA/RTL pack is planned. Selected once during onboarding; Software-only projects are completely unaffected. → [Domain packs guide](readme-content/domain-packs.md)
+Optional, additive extensions to onboarding for mid-to-large embedded engineering — **Embedded MCU** (bare-metal or RTOS) **Embedded Linux** (Yocto/Buildroot), and **FPGA/RTL** are available now. Selected once during onboarding; Software-only projects are completely unaffected. → [Domain packs guide](readme-content/domain-packs.md)
 
 ---
 

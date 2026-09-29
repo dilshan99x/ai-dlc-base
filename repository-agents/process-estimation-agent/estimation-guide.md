@@ -38,6 +38,7 @@ Both modes reference this rate model. All ranges reflect AI-assisted delivery by
 | 4–10 external integration points | +15% to Tier B and C items |
 | 10+ external integration points | +25% to Tier B and C items |
 | Project has a hardware Domain Profile and this is a first bring-up (no working board/BSP/bitstream yet) | +30% overall — bring-up uncertainty is not comparable to greenfield software risk |
+| Project has an FPGA Domain Profile | +20% to Tier B and C items — timing closure is iterative and its iteration count is not knowable up front |
 | Project requires bench/lab equipment time (HIL verification, oscilloscope/logic-analyzer work) not otherwise captured above | +10% overall |
 
 ### Mode 2 Tier Table (unit level)

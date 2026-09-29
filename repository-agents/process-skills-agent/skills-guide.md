@@ -244,9 +244,9 @@ Computes four process health metrics — improvement adoption rate, quality gate
 
 ---
 
-### EMBEDDED & LINUX
+### EMBEDDED, LINUX & FPGA
 
-*Relevant only to teams building MCU firmware or embedded Linux — skip this category entirely for web/backend/mobile teams.* Sourced from `process-onboarding-agent/domains/{embedded-mcu,embedded-linux}/skills/` rather than `process-onboarding-agent/skills/` — see Step 5 for the domain-pack copy paths.
+*Relevant only to teams building MCU firmware, embedded Linux, or FPGA/RTL — skip this category entirely for web/backend/mobile teams.* Sourced from `process-onboarding-agent/domains/{embedded-mcu,embedded-linux,fpga}/skills/` rather than `process-onboarding-agent/skills/` — see Step 5 for the domain-pack copy paths.
 
 **Hardware Bring-up** (`embedded-mcu/skills/hardware-bring-up.md`) `◈ Needs config`
 
@@ -335,6 +335,34 @@ An addition to your existing code review for kernel/driver code — locking corr
 
 ---
 
+**FPGA Verification** (`fpga/skills/fpga-verification.md`) `◇ Framework-only`
+
+An addition to code review for RTL — requires testbench/simulation/coverage evidence, not a diff read, before RTL is considered reviewable.
+
+- **When to invoke:** reviewing any unit that changes RTL
+- **How to invoke:** `"Read [skill-path]/fpga-verification.md and verify this RTL change: [paste diff or description]."`
+- **Dependency:** extends `skills/review-checklist.md`, which is generated per project by the full framework.
+
+---
+
+**Timing Closure Check** (`fpga/skills/timing-closure-check.md`) `◆ Standalone`
+
+A gate on static timing analysis results and resource utilization after synthesis/place-and-route — distinct from functional simulation, which cannot catch a timing violation.
+
+- **When to invoke:** before considering an RTL milestone or release complete
+- **How to invoke:** `"Read [skill-path]/timing-closure-check.md and check timing closure for [build/milestone]."`
+
+---
+
+**Bitstream Release** (`fpga/skills/bitstream-release.md`) `◈ Needs config`
+
+Versions an FPGA bitstream release with full build provenance — RTL source, toolchain version, timing margin, target board revision.
+
+- **When to invoke:** releasing/tagging a bitstream build
+- **How to invoke:** `"Read [skill-path]/bitstream-release.md and release a bitstream for [version]."`
+
+---
+
 ### NEW TEAM MEMBERS
 
 **New Engineer Induction** (`new-engineer-induction.md`) `◇ Framework-only`
@@ -395,6 +423,7 @@ Copy each selected skill file to `{SKILLS_ROOT}/[filename].md`. Do not modify th
 - Base catalogue skills: `process-onboarding-agent/skills/[filename].md`
 - Embedded MCU skills: `process-onboarding-agent/domains/embedded-mcu/skills/[filename].md`
 - Embedded Linux skills: `process-onboarding-agent/domains/embedded-linux/skills/[filename].md`
+- FPGA/RTL skills: `process-onboarding-agent/domains/fpga/skills/[filename].md`
 
 After copying, list every installed file and confirm the file count with the engineer before proceeding to Step 6.
 

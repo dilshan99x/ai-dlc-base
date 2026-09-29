@@ -38,7 +38,9 @@ Nothing in the base framework is removed or rewritten by this — it is strictly
 
 **Embedded Linux** (`domains/embedded-linux/`) — kernel/driver coding style (checkpatch-aligned) and userspace coding standards; a license-compliance rule file covering GPL/LGPL obligations and SBOM requirements; a Linux-specific board bring-up bolt (bootloader → kernel → device tree → rootfs, distinct from the MCU pack's register-level bring-up); an A/B partition OTA update bolt that mandates a simulated power-loss-during-update test before any field rollout; and a kernel-driver review addition layered onto the standard review checklist. A dependency-audit addition (`dependency-audit-linux.md`) layers Yocto/Buildroot manifests and a license-classification pass onto the standard `dependency-audit.md` — run both — so the base skill stays domain-neutral.
 
-**FPGA / RTL** is a planned pack — the Domain Overlay mechanism above supports it (see `domains/README.md` for current pack status), but its content has not landed yet. Selecting that profile today falls back to Software per the overlay's fallback instruction.
+**FPGA / RTL** (`domains/fpga/`) — synchronous-design and clock-domain-crossing coding rules; an FPGA verification skill that layers onto the review checklist and requires testbench/simulation/coverage evidence (not a diff read) before an RTL unit is marked Done; a timing-closure check that gates bolt completion on static timing analysis and resource-utilization results, not just functional simulation; and a bitstream release skill that records build provenance (RTL commit, toolchain version, timing margin, target board revision) with every release.
+
+**Validation status:** the FPGA/RTL pack has not yet been validated against a real synthesis toolchain or board, unlike the Embedded MCU and Embedded Linux packs — treat its skills and rules as reviewed-but-unverified until a bring-up/verification run is recorded here.
 
 ---
 
@@ -51,4 +53,4 @@ Nothing in the base framework is removed or rewritten by this — it is strictly
 
 ## Adopting a Single Skill Without the Full Framework
 
-Domain-pack skills follow the same bespoke-adoption path as the base framework's skills (see [Skills for bespoke processes](skills-for-bespoke-processes.md)) — a team that wants just, say, the HIL verification skill or the hardware bring-up bolt without the full governance layer can adopt it standalone through `process-skills-agent/`.
+Domain-pack skills follow the same bespoke-adoption path as the base framework's skills (see [Skills for bespoke processes](skills-for-bespoke-processes.md)) — a team that wants just, say, the HIL verification skill or the timing-closure check without the full governance layer can adopt it standalone through `process-skills-agent/`.
