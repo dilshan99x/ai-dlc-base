@@ -93,7 +93,7 @@ Work through whichever of the following apply to this intent, one at a time — 
 3. > "For a new or changed pin: name, function, direction, and any electrical notes (voltage domain, pull-up/down, drive strength)?"
 4. > "What is the timing contract — setup/hold requirements, maximum response latency, or protocol timing this interface must meet?"
 
-Write confirmed entries to the register-map location defined by the installed domain pack, or the project's equivalent hardware ICD location.
+Write confirmed entries to `{FRAMEWORK_ROOT}/ops/inception/register-map/` (Embedded MCU) or the project's equivalent hardware ICD location.
 
 **If this intent introduces or changes RTOS tasks/threads (Embedded MCU with RTOS selected):**
 
@@ -102,7 +102,7 @@ Write confirmed entries to the register-map location defined by the installed do
 3. > "What is the worst-case stack usage, and what margin is budgeted above it?"
 4. > "How does this task communicate with others — queue, semaphore, mutex, event flag? Could it block unboundedly?"
 
-Read the installed domain pack's RTOS design rules (under `{FRAMEWORK_ROOT}/rules/`), if it provides any, before finalizing — flag any conflict with its priority-inversion or unbounded-blocking rules before moving on.
+Read `{FRAMEWORK_ROOT}/rules/rtos-design-rules.md` before finalizing — flag any conflict with its priority-inversion or unbounded-blocking rules before moving on.
 
 **If this intent crosses a domain/processor boundary (2+ hardware profiles selected, or hardware talking to the software stack):**
 
@@ -261,7 +261,7 @@ The artifact uses this structure:
 
 [description]
 **Details:** [register/pin table, task priority/stack/IPC summary, or inter-domain transport and failure behavior — whichever applies]
-**Reference:** [link to register-map file / RTOS design-rules conflict check / ICD file]
+**Reference:** [link to register-map file / rtos-design-rules.md conflict check / ICD file]
 
 ---
 

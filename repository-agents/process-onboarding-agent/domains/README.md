@@ -8,7 +8,7 @@ The mechanism — what a pack contains, and exactly how and when its content is 
 
 | Pack | Folder | Status |
 |---|---|---|
-| Embedded MCU (bare-metal or RTOS) | `embedded-mcu/` | Not yet built |
+| Embedded MCU (bare-metal or RTOS) | `embedded-mcu/` | Built |
 | Embedded Linux (Yocto/Buildroot, kernel + userspace) | `embedded-linux/` | Not yet built |
 | FPGA / RTL | `fpga/` | Not yet built |
 

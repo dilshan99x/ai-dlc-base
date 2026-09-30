@@ -21,7 +21,7 @@ What AI-DLC *does* provide is the **master guideline** — a structured process 
 
 The result is a governance layer that is genuinely native to your project — written in your team's language, calibrated to your stack, and tightened by your own retros.
 
-> **Note on bolt-type skills:** The skill files `bug-bolt.md`, `hotfix-bolt.md`, and `nfr-bolt.md` are bolt-type variants within the framework — not standalone tools. They abbreviate the elaboration ceremony for specific work types (bugs, production incidents, non-functional improvements) while keeping all quality gates active. They require the full AI-DLC framework to be installed and are routed from the master rule file. Do not use them in isolation. A hardware Domain Profile adds further bolt-type variants the same way — for example board bring-up, hardware verification, and firmware release bolts — installed only for the selected domain pack(s); see [Domain packs](domain-packs.md).
+> **Note on bolt-type skills:** The skill files `bug-bolt.md`, `hotfix-bolt.md`, and `nfr-bolt.md` are bolt-type variants within the framework — not standalone tools. They abbreviate the elaboration ceremony for specific work types (bugs, production incidents, non-functional improvements) while keeping all quality gates active. They require the full AI-DLC framework to be installed and are routed from the master rule file. Do not use them in isolation. A hardware Domain Profile adds further bolt-type variants the same way — hardware/Linux board bring-up, HIL verification, firmware/OTA release, and errata bolts — installed only for the selected domain pack(s); see [Domain packs](domain-packs.md).
 
 ---
 
@@ -121,7 +121,7 @@ The output is a comprehensive Review Report containing: a domain-by-domain score
 
 **How it works:**
 - Runs a five-question discovery interview about the team's current process, AI touchpoints, common failure modes, stakeholder communication, and capability gaps
-- Presents the full skills catalogue (19 skills grouped by delivery moment) with a dependency classification for each: **Standalone** (invoke directly), **Needs config** (one small configuration at invocation), or **Framework-only** (requires the full framework)
+- Presents the full skills catalogue (24 skills grouped by delivery moment — 19 base skills plus 5 Embedded MCU domain-pack skills) with a dependency classification for each: **Standalone** (invoke directly), **Needs config** (one small configuration at invocation), or **Framework-only** (requires the full framework)
 - Flags skills most relevant to the team's answers with a ★ Recommended marker
 - Engineer selects skills; agent warns before installing any Framework-only skills
 - Copies selected skill files to the team's chosen path

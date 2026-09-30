@@ -34,7 +34,9 @@ Nothing in the base framework is removed or rewritten by this — it is strictly
 
 ## What Each Pack Adds
 
-**Embedded MCU**, **Embedded Linux**, and **FPGA / RTL** are planned packs — the Domain Overlay mechanism above supports them (see `domains/README.md` for current pack status), but their content has not landed yet. Selecting any hardware profile today falls back to Software per the overlay's fallback instruction.
+**Embedded MCU** (`domains/embedded-mcu/`) — bare-metal or RTOS design decisions folded into the Phase 0 design session (task priority, stack budget, ISR-vs-deferred-work split); firmware coding standards and fail-safe/watchdog/ISR rules; a hardware bring-up bolt (first power-on and peripheral checkout); a HIL (hardware-in-the-loop) verification skill that replaces UAT's plain-language demo with a bench-test script and requires a measured value, not just a pass/fail verdict; a BOM/component-EOL audit (opt-in, hardware track only); a single-image firmware release bolt; and an errata bolt for silicon workarounds that protects the workaround from being "cleaned up" by a later unit that doesn't know why it exists.
+
+**Embedded Linux** and **FPGA / RTL** are planned packs — the Domain Overlay mechanism above supports them (see `domains/README.md` for current pack status), but their content has not landed yet. Selecting either profile today falls back to Software per the overlay's fallback instruction.
 
 ---
 
@@ -47,4 +49,4 @@ Nothing in the base framework is removed or rewritten by this — it is strictly
 
 ## Adopting a Single Skill Without the Full Framework
 
-Domain-pack skills follow the same bespoke-adoption path as the base framework's skills (see [Skills for bespoke processes](skills-for-bespoke-processes.md)) — a team that wants just, say, one pack's verification or bring-up skill without the full governance layer can adopt it standalone through `process-skills-agent/`.
+Domain-pack skills follow the same bespoke-adoption path as the base framework's skills (see [Skills for bespoke processes](skills-for-bespoke-processes.md)) — a team that wants just, say, the HIL verification skill or the hardware bring-up bolt without the full governance layer can adopt it standalone through `process-skills-agent/`.

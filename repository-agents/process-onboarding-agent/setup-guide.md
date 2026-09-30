@@ -434,8 +434,19 @@ Run the following once for **each** selected profile whose pack folder exists, a
 1. **Interview substitution.** Read `domains/{pack}/interview.md`. For a Fresh project, its questions replace Questions 2–8 of the Fresh Project — Structured Interview (Question 1 — Product identity — and Question 9 — Documentation archive threshold — stay generic and are asked once, not once per pack). For a Mature project, its guidance extends Phase M1 (Architecture Mapping and Pattern Extraction look different for firmware/RTL/kernel code than for application code) — read it before starting M1.1 for any segment in that domain.
 2. **Master rule additions.** Read `domains/{pack}/master-rule-additions.md` and merge its content into the relevant numbered sections of the master rule file (Section 1 gains a Hardware Profile subsection, Section 3 gains domain-specific hard-stops, Section 6 gains routing lines for the pack's skills, Section 9 gains any pack-specific scheduled audit). Merge — never overwrite — anything the base guide already wrote into those sections.
 3. **Rules, skills, and ops files.** Copy every file under `domains/{pack}/rules/`, `domains/{pack}/skills/`, and `domains/{pack}/ops/` into the matching subfolder of `{FRAMEWORK_ROOT}/`, alongside the standard files Step 3, Step 4, and Step 6 of the base guide already write there. Nothing in the base guide's own `rules/`, `skills/`, or `ops/` output is removed or renamed.
-4. **Hardware track opt-in.** Ask the engineer once per pack: *"Should the hardware track (schematic/PCB review, BOM sourcing and component-lifecycle tracking) be part of this project, or is hardware treated as a fixed interface the firmware/RTL works against?"* Hardware-track files (e.g. a BOM audit skill, the hardware revision log) are copied only if the engineer opts in. Default is out.
+4. **Hardware track opt-in.** Ask the engineer once per pack: *"Should the hardware track (schematic/PCB review, BOM sourcing and component-lifecycle tracking) be part of this project, or is hardware treated as a fixed interface the firmware/RTL works against?"* Hardware-track files (e.g. `bom-audit.md`, the hardware revision log) are copied only if the engineer opts in. Default is out.
 5. **Compliance — opt-in only, never automatic.** Do not run or reference any compliance checklist (MISRA-C, IEC 61508, ISO 26262, DO-178C, etc.) unless the engineer explicitly asks for one. If they ask without naming a specific standard, use the relevant open/publicly-available standard for that context (e.g. SEI CERT C for general embedded coding safety) rather than assuming a specific paid or proprietary certification scheme.
+
+### Pack skills — installation and routing reference
+
+Each pack skill is copied verbatim from `process-onboarding-agent/domains/{pack}/skills/{name}.md` to `{FRAMEWORK_ROOT}/skills/{name}.md` (step 3 above). Its master-rule Section 6 routing line is the one in that pack's `master-rule-additions.md` — merged in step 2 — not written here.
+
+**Embedded MCU** (`domains/embedded-mcu/skills/`):
+- **Hardware bring-up skill:** copy `hardware-bring-up.md` to `{FRAMEWORK_ROOT}/skills/hardware-bring-up.md`. Routed when the engineer says "bring up the board" or "first power-on for X".
+- **HIL verification skill:** copy `hil-verification.md` to `{FRAMEWORK_ROOT}/skills/hil-verification.md`. Routed when all units under a hardware-touching intent are Done.
+- **Firmware release bolt:** copy `firmware-release-bolt.md` to `{FRAMEWORK_ROOT}/skills/firmware-release-bolt.md`. Routed on "release firmware" or "field update for X".
+- **Errata bolt:** copy `errata-bolt.md` to `{FRAMEWORK_ROOT}/skills/errata-bolt.md`. Routed on "errata workaround" or "silicon bug in X".
+- **BOM audit skill (hardware track opt-in only):** copy `bom-audit.md` to `{FRAMEWORK_ROOT}/skills/bom-audit.md` only if the engineer opted into the hardware track (step 4 above).
 
 ### Integration overlay (2 or more profiles selected)
 

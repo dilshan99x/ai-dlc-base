@@ -52,7 +52,7 @@ Both modes reference this rate model. All ranges reflect AI-assisted delivery by
 **Overhead applied to each bolt:**
 - Base overhead: +20% of sum of unit estimates (covers retro, review, integration testing, bolt report)
 - QA buffer: +10% of Complex unit hours if any Complex units are present in the bolt
-- **Hardware verification buffer** (only if the project has a hardware Domain Profile): +15% of unit hours for any bolt containing units gated by a domain pack's hardware-verification or bring-up skill — these gates commonly require a re-run after the first attempt (a bench measurement out of tolerance, a bring-up checkpoint that fails), which a pure-software QA buffer does not account for
+- **Hardware verification buffer** (only if the project has a hardware Domain Profile): +15% of unit hours for any bolt containing units gated by `hil-verification.md` or a bring-up skill — these gates commonly require a re-run after the first attempt (a bench measurement out of tolerance, a bring-up checkpoint that fails), which a pure-software QA buffer does not account for
 
 When classifying units on a hardware-domain project, treat a unit gated by hardware bring-up or HIL verification as at least **Complex** by default, even if its AC count is low — the effort driver for these units is verification against physical reality, not AC count, and the Simple/Standard tiers assume it does not apply.
 
