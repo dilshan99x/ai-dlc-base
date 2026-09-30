@@ -1,6 +1,6 @@
 # Skill: Firmware Release Bolt
 
-**Purpose:** A bolt workflow for a planned field firmware update — single-image release (not A/B partition; a project with an A/B update mechanism uses the Embedded Linux domain pack's OTA skill instead, when that pack is installed). Distinct from `hotfix-bolt.md`: this is a planned release, not an emergency. Mandates a rollback test before any field rollout.
+**Purpose:** A bolt workflow for a planned field firmware update — single-image release (not A/B partition; that's `embedded-linux/skills/ota-ab-update-bolt.md`). Distinct from `hotfix-bolt.md`: this is a planned release, not an emergency. Mandates a rollback test before any field rollout.
 
 **Trigger:** Engineer says "release firmware", "field update for X", or "OTA update for X" on a single-image MCU project. Routed from the master rule file Section 6.
 
