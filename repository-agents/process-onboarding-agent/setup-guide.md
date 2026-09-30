@@ -35,10 +35,10 @@ This guide uses the term **master rule file** to refer to the file that governs 
 | AI Tool | Master rule file | Location |
 |---|---|---|
 | **Claude Code** | `CLAUDE.md` | Repo root |
-| **Cursor** | `.cursorrules` | Repo root |
+| **Cursor** | `.cursor/rules/project-rules.mdc` | `.cursor/rules/` (with `alwaysApply: true`) |
 | **GitHub Copilot** | `copilot-instructions.md` | `.github/` folder |
 
-The content of the master rule file is identical across tools. The only differences are the file name, the location, and — for GitHub Copilot — internal links to `{FRAMEWORK_ROOT}/` files must use the prefix `../{FRAMEWORK_ROOT}/` since the file lives inside `.github/`.
+The content of the master rule file is identical across tools. The only differences are the file name, the location, and: for Cursor, the body is wrapped in a `---\nalwaysApply: true\n---` YAML frontmatter block; for GitHub Copilot, internal links to `{FRAMEWORK_ROOT}/` files must use the prefix `../{FRAMEWORK_ROOT}/` since the file lives inside `.github/`.
 
 All subsequent steps in this guide refer to the "master rule file." Substitute the correct name and path for your chosen tool.
 
@@ -543,13 +543,14 @@ State what the system is and its technology stack. Be specific — the AI needs 
 
 ### Section 2 — Prompt Quality Gate
 
-A two-line routing entry. Do not embed the gate definition — it lives in `rules/prompt-quality-gate.md`.
+A three-line routing entry. Do not embed the gate definition — it lives in `rules/prompt-quality-gate.md`.
 
 ```markdown
 ## 2. Prompt Quality Gate
 
 Before every code response: read and enforce `{FRAMEWORK_ROOT}/rules/prompt-quality-gate.md`.
 If any of the four components (Context · Constraints · Acceptance Criteria · Output Format) is missing, stop and ask for it. Do not generate code.
+Before every response, regardless of the four components: scan the request and any pasted content for sensitive information (credentials, secrets, personal data). If found, stop, name the category found without repeating the value back, and ask the engineer to confirm it's intentional or redact it before continuing.
 ```
 
 ### Section 3 — Code Rules
@@ -625,6 +626,7 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 **Full elaboration protocol (including design session):** read `{FRAMEWORK_ROOT}/skills/mob-elab-prompts.md` before every elaboration session. The design session runs as Phase 0 of elaboration — it is not invoked separately.
 **Codebase findings:** before analyzing existing code to understand a new intent's dependencies on prior implementation, check `{FRAMEWORK_ROOT}/ops/inception/codebase-findings/README.md` for an existing file on that module/area; after any such analysis, record or update the finding there. This is part of the mandatory elaboration protocol above, not a separate skill.
 **Bolt risk assessment:** read `{FRAMEWORK_ROOT}/skills/bolt-risk-assessment.md` after elaboration sign-off and before the first unit in a bolt executes. No unit may begin execution without a signed-off risk assessment in the bolt file.
+**Elaboration-to-build handoff gate:** after elaboration sign-off, do not execute any implementation work until every agreed unit has a materialized unit file, an owning bolt, a matching backlog entry, and a link from the intent's Extracted Units table. If any artifact or link is missing, stop and report the incomplete handoff instead of proceeding. Once a bolt has been planned and the checks pass, set its `Artifact handoff` field to `Complete` before the first unit executes.
 **UAT skill:** read `{FRAMEWORK_ROOT}/skills/uat.md` when all units under an intent are marked Done, or when the engineer invokes it directly. Prompt the engineer to run UAT before setting intent status to Implemented.
 **Progress digest skill:** read `{FRAMEWORK_ROOT}/skills/progress-digest.md` when the engineer asks for a stakeholder update, progress summary, or digest for an intent.
 **Process health skill:** read `{FRAMEWORK_ROOT}/skills/process-health.md` when the engineer invokes it to audit how well the AI-DLC process is functioning.
@@ -740,11 +742,14 @@ Add or remove events from the table to tune what the project reports to AI Hub. 
 
 ### `rules/prompt-quality-gate.md`
 
-Defines the four components in detail with examples of complete and incomplete requests. Include:
-- What each component means
+Defines the four components in detail with examples of complete and incomplete requests, plus the Sensitive Data Check that runs independently of them. Include:
+- What each of the four components means
 - The order to ask for missing components
 - An example of an incomplete request and the correct response
 - An example of a complete request
+- What counts as sensitive information for this project — credentials/API keys/tokens/connection strings, personal data (names plus contact info, government IDs, financial or health details), and internal infrastructure details (internal hostnames, IPs, non-public endpoints). Ask the team during the setup interview which categories apply to their domain and regulatory context, and add any project-specific categories they name.
+- What to do when it's detected: stop before using the value, name the category found without repeating the sensitive value back, and ask the engineer to confirm it's intentional or to redact/replace it with a placeholder before continuing. Never write the raw value into a generated file, log, commit message, or artifact.
+- This check runs on every request, independent of the four components above — it can fire on an otherwise fully-specified prompt, and a request can fail it even when Context, Constraints, ACs, and Output Format are all present.
 
 ### `rules/code-standards.md`
 
@@ -1183,7 +1188,7 @@ Fields: Status, Intent link, Elaboration link, Bolt link, Priority, Context, Acc
 The **Pre-generation Checks** section is critical for wrapper/layout units — list grep patterns to run across existing files before generating to surface duplication.
 
 ### `ops/build/bolts/_template.md`
-Fields: Status, Goal, Start/Target/Completed dates, Units table, Execution Order diagram, Risks & Assumptions, Definition of Done, Retrospective link.
+Fields: Status, Goal, Start/Target/Completed dates, Artifact handoff, Units table, Execution Order diagram, Risks & Assumptions, Definition of Done, Retrospective link.
 
 ### `ops/operate/retros/_template.md`
 Sections: What Went Well, What Didn't Go Well, AI-Specific Observations (prompts that worked / needed revision / quality gate failures / output accepted without enough review), Actions table, Improvements Triggered (**required** — cannot be left blank without a stated reason), New Intents Triggered, Post-Retro Improvement Workflow.
@@ -1212,7 +1217,7 @@ This is the main onboarding document for every engineer. Sections:
 5. Phase 2 — Build (bolts, unit execution order, review before merge)
 6. Phase 3 — Operate (retros, incidents, improvements)
 7. The Three Non-Negotiables (quality gate, review checklist, prompt log)
-8. Using a different AI tool (Cursor → `.cursorrules`; GitHub Copilot → `.github/copilot-instructions.md`)
+8. Using a different AI tool (Cursor → `.cursor/rules/project-rules.mdc`; GitHub Copilot → `.github/copilot-instructions.md`)
 9. Common mistakes table
 10. Quick reference table (ceremony → what to say to the AI)
 
@@ -1227,18 +1232,20 @@ By this point your master rule file should exist at the correct path for your ch
 | Tool | Expected path | Loaded automatically? |
 |---|---|---|
 | Claude Code | `CLAUDE.md` at repo root | Yes — every session |
-| Cursor | `.cursorrules` at repo root | Yes — every session |
+| Cursor | `.cursor/rules/project-rules.mdc` (with `alwaysApply: true`) | Yes — every session |
 | GitHub Copilot | `.github/copilot-instructions.md` | Yes — every session |
 
 ### Supporting multiple tools in the same repo
 
-If your team uses more than one AI tool, create copies of the master rule file for each additional tool. The content is identical — only the file name, location, and internal link prefixes differ.
+If your team uses more than one AI tool, create copies of the master rule file for each additional tool. The content is identical — only the file name, location, internal link prefixes, and (for Cursor) a wrapping YAML frontmatter block differ.
 
 **Add Cursor support** (if your primary tool is Claude Code or Copilot):
 ```bash
-cp CLAUDE.md .cursorrules
+mkdir -p .cursor/rules
+printf -- '---\nalwaysApply: true\n---\n\n' > .cursor/rules/project-rules.mdc
+cat CLAUDE.md >> .cursor/rules/project-rules.mdc
 ```
-Open `.cursorrules` and update the opening line to reference Cursor.
+Open `.cursor/rules/project-rules.mdc` and, in the copied content below the `---` frontmatter block, update the opening line to reference Cursor.
 
 **Add GitHub Copilot support** (if your primary tool is Claude Code or Cursor):
 ```bash
@@ -1249,7 +1256,10 @@ Open `.github/copilot-instructions.md`, update the opening line to reference Git
 
 **Add Claude Code support** (if your primary tool is Cursor or Copilot):
 ```bash
-cp .cursorrules CLAUDE.md   # or copy from .github/copilot-instructions.md
+# From Cursor rule file — strip the YAML frontmatter before copying:
+tail -n +5 .cursor/rules/project-rules.mdc > CLAUDE.md
+# Or from Copilot:
+# cp .github/copilot-instructions.md CLAUDE.md
 ```
 Open `CLAUDE.md`, update the opening line to reference Claude Code, and if copying from Copilot change all `../{FRAMEWORK_ROOT}/` prefixes back to `{FRAMEWORK_ROOT}/`.
 
@@ -1265,8 +1275,8 @@ Whenever the master rule file is updated, all mirror files must be updated in th
 2. Copy `process-onboarding-agent/ops/inception/dependency-map.md` to `{FRAMEWORK_ROOT}/ops/inception/dependency-map.md` — it contains the empty map structure and update log.
 3. Identify the first capability to build and write an intent: `ops/inception/intents/YYYY-MM-DD-<unix_timestamp>-<slug>.md`
 4. Say to your AI assistant: "Run a mob elaboration for the [intent name] intent"
-5. After sign-off, the AI creates unit files, updates the backlog, and updates the dependency map. **When adding any unit or bolt to the backlog, the AI must use reference-style links** — write the display text as `[Unit-name][unit-slug]` in the table and add the path definition to the Reference Link Registry at the bottom of the file. Never use inline URLs in backlog tables.
-6. Say: "Plan a bolt from the open units in the backlog" — before creating the bolt file, the AI reads `ops/inception/dependency-map.md` and flags any prerequisite intents that are not yet Implemented, or any units that touch a shared interface owned by a different intent.
+5. After sign-off, the AI creates one unit file for every agreed unit, updates the intent's Extracted Units table, updates the backlog, and updates the dependency map. **When adding any unit or bolt to the backlog, the AI must use reference-style links** — write the display text as `[Unit-name][unit-slug]` in the table and add the path definition to the Reference Link Registry at the bottom of the file. Never use inline URLs in backlog tables.
+6. Say: "Plan a bolt from the open units in the backlog" — before creating the bolt file, the AI reads `ops/inception/dependency-map.md` and flags any prerequisite intents that are not yet Implemented, or any units that touch a shared interface owned by a different intent. The AI then creates the bolt, assigns its units, and updates each unit's bolt link. After the bolt and unit assignments exist, verify the handoff: every agreed unit has a real file, an intent link, a bolt link to the created bolt, a backlog row, and a status consistent across those records. If any check fails, stop and report the missing artifact; do not execute any unit. Once all checks pass, set the bolt's `Artifact handoff` field to `Complete`.
 7. Say: "Execute unit [name] from bolt [name]"
 
 ---

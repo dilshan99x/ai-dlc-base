@@ -33,6 +33,7 @@ For everything else — fixing an unclear instruction, adding a new skill, corre
 | Template change (intent, unit, bolt, retro, etc.) | `repository-agents/*/ops/**/_template.md` |
 | Onboarding, diagnostics, migration, skills, or estimation agent protocol | The relevant `repository-agents/process-*-agent/*.md` |
 | Documentation | `README.md`, `readme-content/*.md` |
+| Framework rationale (informational only — see `RULES.md` §1) | `framework-values.md` |
 | Repository governance (cross-reference rules, PR review checklist) | `RULES.md`, `pr-review.md` |
 
 ### Style and conventions

@@ -65,7 +65,7 @@ Read all files within scope before calculating any metric. Do not calculate or r
 
 ## Step 3 — Calculate Metric 2: Quality Gate Failure Rate
 
-**What it measures:** How often the Prompt Quality Gate is failing — meaning the engineer is submitting incomplete prompts and the AI is having to stop and ask for missing context, constraints, ACs, or output format.
+**What it measures:** How often the Prompt Quality Gate is failing — meaning the AI is having to stop and ask, either because the engineer submitted an incomplete prompt (missing context, constraints, ACs, or output format) or because the Sensitive Data Check found a credential, secret, or personal data in an otherwise complete prompt.
 
 **Source:** The "Quality gate failures" subsection of "AI-Specific Observations" in every retro file in scope.
 

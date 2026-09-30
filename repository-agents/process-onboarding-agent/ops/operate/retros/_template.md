@@ -37,7 +37,7 @@
 - [Description — what was wrong and how it was fixed]
 
 **Quality gate failures:**
-- [Description — which component was missing and what was asked]
+- [Description — which component was missing, or which sensitive-data category triggered a Sensitive Data Check stop, and what was asked]
 
 **Output accepted without sufficient review:**
 - [Description — what slipped through and what the consequence was]

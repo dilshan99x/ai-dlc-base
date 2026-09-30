@@ -62,7 +62,7 @@ Every finding must be classified before it goes into the report.
 
 ## Domain 1 — Foundation
 
-**What you are reviewing:** The master rule file (`CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`)
+**What you are reviewing:** The master rule file (`CLAUDE.md`, `.cursor/rules/project-rules.mdc` (or any `.mdc` under `.cursor/rules/`), `.cursorrules` (legacy), or `.github/copilot-instructions.md`)
 
 **How to request it:**
 > "Please share your master rule file — the file your AI tool loads automatically at the start of every session."
@@ -72,7 +72,7 @@ Every finding must be classified before it goes into the report.
 | Check | Aligned | Partially Aligned | Not Aligned |
 |---|---|---|---|
 | **Project Identity (Section 1)** | Stack, boundaries, and system constraints are specific and accurate | Present but vague or incomplete | Missing or generic placeholder |
-| **Prompt Quality Gate (Section 2)** | Routes to `rules/prompt-quality-gate.md` with a clear mandatory-read instruction | Gate referenced but embedded inline as a wall of text | Missing entirely |
+| **Prompt Quality Gate (Section 2)** | Routes to `rules/prompt-quality-gate.md` with a clear mandatory-read instruction, and includes the mandatory Sensitive Data Check line (scans every request regardless of whether the four components are complete) | Gate referenced but embedded inline as a wall of text, or the four-component routing is present but the Sensitive Data Check line is missing | Missing entirely |
 | **Code Rules (Section 3)** | 3–5 hard-stop prohibitions in working memory; routes to rules files for the rest | Long lists embedded inline; no routing | Missing or only generic rules |
 | **Domain Language (Section 4)** | Routes to `guidelines/domain-glossary.md`; 2–3 critical terms inline | Full glossary embedded inline (not routed) | Domain terms not defined |
 | **Edge Cases (Section 5)** | Routes to `guidelines/edge-cases.md` with a mandatory-read instruction | Some edge cases inline; no routing | Missing |
@@ -155,6 +155,7 @@ Note the location each file comes from in the Artifact Log. Review the planning 
 | **Goal is bounded** | One clear outcome; maps to one intent | Multiple intents mixed | Vague or missing goal |
 | **Units table** | All units listed with status and links | Present but incomplete | Missing |
 | **Execution order** | Dependencies between units are documented | Implied but not stated | Missing — units executed in arbitrary order |
+| **Artifact handoff** | Marked Complete; every unit has a materialized file, owning bolt, intent link, and backlog link | Field present but handoff evidence is incomplete | Missing or still Pending |
 | **Risk Assessment** | Blast radius table present; rollback assessment and feature flag decision recorded (mandatory for mature projects) | "Risks and Assumptions" present but no blast radius or rollback analysis | Missing entirely |
 | **Retrospective link** | Links to completed retro for Done bolts | Missing on Done bolts | — |
 
